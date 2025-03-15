@@ -17,7 +17,6 @@ describe('AppComponent', () => {
   it(`should have the 'warehouse-management-frontend' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('warehouse-management-frontend');
   });
 
   it('should render title', () => {

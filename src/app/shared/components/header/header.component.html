@@ -1,0 +1,14 @@
+<div class="navbar bg-base-300 w-full">
+  <div class="flex-none">
+    <!-- Botón para abrir/cerrar el sidebar -->
+    <button 
+      class="btn btn-square btn-ghost transition-transform duration-500 ease-in-out"
+      (click)="toggleSidebar()">
+      <i class="fas text-2xl transition-transform duration-500"
+         [ngClass]="iconMenu() ? 'fa-bars rotate-0' : 'fa-times rotate-180'"></i>
+    </button>
+  </div>
+  <div class="flex-1 px-2 mx-2">
+    <span class="text-lg font-bold">Dashboardman</span>
+  </div>
+</div>

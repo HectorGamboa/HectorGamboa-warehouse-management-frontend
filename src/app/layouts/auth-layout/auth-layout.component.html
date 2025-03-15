@@ -1,0 +1,17 @@
+<div class="flex items-center justify-center min-h-screen">
+    <div class="absolute top-4 right-4">
+    <i class="fas" [ngClass]="{'fa-sun': !isChecked, 'fa-moon': isChecked}"></i>
+        <label for="toggle" class="text-sm text-gray-600 mr-2 ml-2">{{isChecked?"Dark Mode":"Light Mode"}}</label>
+        <input type="checkbox" [checked]="isChecked" (change)="changeTheme()" class="toggle toggle-neutral" />
+    </div>
+    <div class="w-full max-w-md shadow-xl rounded-lg p-6">
+        <div class="card-content">
+            <img
+                class="mx-auto h-20 w-auto"
+                src="assets/logo_polpusa.svg"
+                alt="Your Company"
+            />
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="flex flex-col h-screen">
+  <app-header class="h-16 flex-shrink-0"></app-header>
+
+  <!-- Contenedor principal que ocupa el espacio restante -->
+  <div class="flex flex-grow overflow-hidden">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Contenido principal con scroll -->
+    <main class="flex-grow overflow-y-auto">
+      <div class="w-full max-w-none px-10">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+
+  <app-footer class="h-16 flex-shrink-0"></app-footer>
+</div>

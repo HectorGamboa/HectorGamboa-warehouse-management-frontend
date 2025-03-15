@@ -1,17 +1,5 @@
 @import "tailwindcss";
-:root {
-    --background-color: #ffffff;
-    --text-color: #1a202c; /* gray-900 */
-}
-
-.darkmode {
-    --background-color: #2d3748; /* gray-800 */
-    --text-color: #ffffff;
-}
-
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@plugin "daisyui";
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+  }

@@ -10,15 +10,12 @@ static getTextError(errors: ValidationErrors) {
                 return 'Invalid email';
             case 'required':
                 return 'This field is required';
-
             case 'minlength':
                 return `Minimum of ${errors['minlength'].requiredLength} characters.`;
-
             case 'min':
                 return `Minimum value of ${errors['min'].min}`;
         }
     }
-
     return null;
 }
 
@@ -50,4 +47,7 @@ static getTextError(errors: ValidationErrors) {
 
     return FormUtils.getTextError(errors);
   }
+
+  
+  
 }
