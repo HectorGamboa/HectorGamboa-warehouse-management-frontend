@@ -1,17 +1,21 @@
-<div class="flex items-center justify-center min-h-screen">
-    <div class="absolute top-4 right-4">
-    <i class="fas" [ngClass]="{'fa-sun': !isChecked, 'fa-moon': isChecked}"></i>
-        <label for="toggle" class="text-sm text-gray-600 mr-2 ml-2">{{isChecked?"Dark Mode":"Light Mode"}}</label>
-        <input type="checkbox" [checked]="isChecked" (change)="changeTheme()" class="toggle toggle-neutral" />
+<div class="flex h-screen w-screen">
+    <div class=" hidden flex-1 items-center justify-center bg-cover lg:flex" style="background-image: url('./assets/images/auth-screens.jpg');">
+      <div class="max-w-2xl space-y-4 p-8 text-center text-white">
+        <h1 class="text-4xl font-bold">"Fast, Efficient and Productive"</h1>
+      </div>
     </div>
-    <div class="w-full max-w-md shadow-xl rounded-lg p-6">
-        <div class="card-content">
-            <img
-                class="mx-auto h-20 w-auto"
-                src="assets/logo_polpusa.svg"
-                alt="Your Company"
-            />
-            <router-outlet></router-outlet>
+    <div class=" flex flex-1 items-center justify-center">
+      <div class="max-w-md overflow-y-auto px-4 sm:w-[500px] bg-card p-10 rounded-xl ">
+        <!-- logo -->
+        <div class="flex items-center justify-center gap-3">
+          <!-- <a class="bg-primary rounded-sm p-2">
+            <svg-icon src="assets/icons/logo.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
+          </a> -->
+          <b class="text-md text-foreground font-bold"> Warehouse Management System </b>
         </div>
+        <!-- Route -->
+        <router-outlet></router-outlet>
+      </div>
     </div>
-</div>
+  </div>
+  

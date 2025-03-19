@@ -1,29 +1,16 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter, map } from 'rxjs';
-
+import { RouterOutlet } from '@angular/router';
+import { NgxSonnerToaster } from 'ngx-sonner';
+import { ThemeService } from './shared/services/theme.service';
+import { ResponsiveHelperComponent } from './shared/components/responsive-helper/responsive-helper.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.scss'],
+  imports: [RouterOutlet, ResponsiveHelperComponent, NgxSonnerToaster],
 })
 export class AppComponent {
-  constructor(private router: Router, private titleService: Title, private activatedRoute: ActivatedRoute) {}
+  title = 'Angular Tailwind';
 
-  ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(() => {
-        let route = this.activatedRoute;
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
-        return route.snapshot.data['title'] ? `WHM | ${route.snapshot.data['title']}` : 'WHM.com ';
-      })
-    ).subscribe(title => {
-      this.titleService.setTitle(title);
-    });
-  }
+  constructor(public themeService: ThemeService) {}
 }

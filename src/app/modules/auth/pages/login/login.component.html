@@ -1,17 +1,17 @@
 <div class="w-full mb-4">
-    <h2 class="mt-10 text-center text-2xl font-bold tracking-tight">Welcome</h2>
+    <h2 class="mt-10 text-center text-2xl font-bold text-foreground tracking-tight">Welcome</h2>
 </div>
 <div class="w-full mb-2 h-12">
     <div *ngIf="hasError()" role="alert" class="alert alert-error alert-soft alert-horizontal mb-2">
         <i class="fas fa-exclamation-triangle"></i>
-        <span>Mensaje del sistema: {{menssageError()}} </span>
+        <span>System message: {{menssageError()}} </span>
     </div>
 </div>
 <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
     <div class="w-full mb-5">
-        <label class="input  w-full"   [ngClass]="{ 'input-error': formUtils.isValidField(loginForm, 'email') }">
+        <label class="input  w-full rounded-md border  bg-background text-xs text-foreground placeholder-muted-foreground borderfocus "   [ngClass]="{ 'input-error': formUtils.isValidField(loginForm, 'email') }">
             <i class="fas fa-envelope opacity-50"></i>
-            <input type="email" placeholder="mail@site.com" formControlName="email" />
+            <input type="email " placeholder="email@site.com" formControlName="email" />
         </label>
         <div *ngIf="formUtils.isValidField(loginForm, 'email') || validateField('email')"
             class="form-text text-1xl text-red-500">
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="w-full mb-5">
-        <label class="input  w-full " [ngClass]="{ 'input-error': formUtils.isValidField(loginForm, 'password') }">
+        <label class="input   w-full rounded-md border  bg-background text-xs text-foreground placeholder-muted-foreground borderfocus " [ngClass]="{ 'input-error': formUtils.isValidField(loginForm, 'password') }">
             <i class="fas fa-lock opacity-50"></i>
             <input [type]="showPassword()  ? 'text' : 'password'" formControlName="password"
             placeholder="Enter your password"

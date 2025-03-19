@@ -1,21 +1,24 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SidebarService } from '../../services/sidebar.service';
+import { NgClass, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import packageJson from '../../../../../package.json';
+import { MenuService } from '../../services/menu.service';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css'],
+  imports: [NgClass, NgIf, AngularSvgIconModule, SidebarMenuComponent],
 })
-export class SidebarComponent {
-  isOpen = signal(false);  // Estado del sidebar
+export class SidebarComponent implements OnInit {
+  public appJson: any = packageJson;
 
-  constructor(private sidebarService: SidebarService) {}
+  constructor(public menuService: MenuService) {}
 
-  ngOnInit() {
-    this.sidebarService.sidebarState$.subscribe(state => {
-      this.isOpen.set(state);
-    });
+  ngOnInit(): void {}
+
+  public toggleSidebar() {
+    this.menuService.toggleSidebar();
   }
 }

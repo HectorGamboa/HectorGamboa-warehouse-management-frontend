@@ -1,49 +1,31 @@
-import { CommonModule } from "@angular/common";
-import { RouterOutlet } from "@angular/router";
-import { Component, signal } from "@angular/core";
-import { FooterComponent } from "../../shared/components/footer/footer.component";
-import { HeaderComponent } from "../../shared/components/header/header.component";
-import { SidebarComponent } from "../../shared/components/sidebar/sidebar.component";
-import { SidebarService } from "../../shared/services/sidebar.service";
 
+import { Component, OnInit } from '@angular/core';
+import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
 @Component({
-  selector: 'app-main-layout',
-  imports: [
-    RouterOutlet,
-    CommonModule,
-    FooterComponent,
-    HeaderComponent,
-    SidebarComponent
-    ],
-  templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.css'
+  selector: 'app-layout',
+ templateUrl: './main-layout.component.html',
+  styleUrl: './main-layout.component.css',
+  imports: [SidebarComponent, NavbarComponent, RouterOutlet, FooterComponent],
 })
-export class MainLayoutComponent {
-  isChecked = signal(false);
-  constructor(private sidebarService: SidebarService) {
-    this.loadTheme(); // Cargar el tema guardado al iniciar
-  }
-  loadTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    this.isChecked.set(savedTheme === 'dark');
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }
-  changeTheme() {
-    this.isChecked.set(!this.isChecked);
-    const newTheme = this.isChecked() ? 'dark' : 'light';
-    
-    // ✅ Guardar en localStorage y aplicar el nuevo tema
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  }
-  isOpen = signal(false);
-  ngOnInit() {
-    this.sidebarService.sidebarState$.subscribe(state => {
-      this.isOpen.set(state); 
-      console.log(this.isOpen());
-      
+export class MainLayoutComponent implements OnInit {
+  private mainContent: HTMLElement | null = null;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.mainContent) {
+          this.mainContent!.scrollTop = 0;
+        }
+      }
     });
   }
- 
+
+  ngOnInit(): void {
+    this.mainContent = document.getElementById('main-content');
+  }
 }
+
