@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { finalize } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -68,9 +69,10 @@ export class LoginComponent {
       next: () => {
         console.log("Login exitoso");
         
-        this.router.navigateByUrl("/dashboard");
+       // this.router.navigateByUrl("/dashboard");
       },
       error: (err) => {
+       
         console.log(err);
         this.hasError.set(true);
         this.menssageError.set(err.message || "Ha ocurrido un error");

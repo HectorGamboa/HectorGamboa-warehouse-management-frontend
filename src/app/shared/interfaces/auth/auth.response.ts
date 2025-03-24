@@ -2,6 +2,6 @@ import { User } from "./user.interface";
 
 export interface AuthResponse {
     user:User;
-    token:string;
+    accessToken:string;
     refreshToken:string;
 }

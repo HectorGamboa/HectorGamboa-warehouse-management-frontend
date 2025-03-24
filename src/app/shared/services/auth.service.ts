@@ -29,13 +29,16 @@ export class AuthService {
         return this.http.post<AuthResponse>(`${environment.API_URL}/auth/login`, 
             { email, password })
             .pipe(
-                tap(response => {   
+                tap(response => {  
+                     
                     this._authStatus = "authenticated";
                     this._user.set(response.user);
-                    this._token.set(response.token);
+                    this._token.set(response.accessToken);
                     this._refreshToken.set(response.refreshToken);
-                    localStorage.setItem('token', response.token);
-                    localStorage.setItem('refreshToken', response.refreshToken);
+                    console.log(response);
+                    // localStorage.setItem('userIdentity', response.user);
+                    // localStorage.setItem('accessToken', response.token);
+                    // localStorage.setItem('refreshToken', response.refreshToken);
                     
                 }),
                 map(() => true), // Si todo va bien, devuelve true
@@ -51,4 +54,19 @@ export class AuthService {
             );
     }
     
+    getNewAccessToken() {
+        this._refreshToken.set(this.getRefreshToken());
+        return this.http.post<AuthResponse>(
+            `${environment.API_URL}/auth/refresh-token`, 
+            {refreshToken: this._refreshToken});
+    }
+
+    getAuthToken(){
+        return localStorage.getItem('accessToken') || '';
+    }
+
+    getRefreshToken(){
+        return localStorage.getItem('refreshToken') || '';
+    }
+
 }
