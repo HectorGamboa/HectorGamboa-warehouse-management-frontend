@@ -8,7 +8,7 @@ export class Menu {
       items: [
         {
           icon: 'assets/icons/heroicons/outline/chart-pie.svg',
-          label: 'Dashboard',
+          name: 'Dashboard',
           route: '/dashboard',
         },
         // {

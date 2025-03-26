@@ -24,7 +24,7 @@ export class LoginComponent {
   // Inicializacion de variables
   menssageError = signal("");
   private authService = inject(AuthService);
-    router = inject(Router);
+  router = inject(Router);
   showPassword = signal(false);
   formUtils = FormUtils;
   fb = inject(FormBuilder);
@@ -44,8 +44,6 @@ export class LoginComponent {
     if (field) {
       field.markAsDirty(); // Asegura que el campo se considere "modificado"
       field.updateValueAndValidity(); // Vuelve a validar el campo  
-      // console.log(`Validando campo ${fieldName}: `, field.errors);
-      // console.log(`Mensaje de error:`, this.formUtils.getFieldError(this.loginForm, fieldName)); // 🔍 Depuración
     }
   }
 
@@ -66,17 +64,12 @@ export class LoginComponent {
     this.authService.login(email, password).
     pipe(finalize(() => this.isPosting.set(false)))
     .subscribe({
-      next: () => {
-        console.log("Login exitoso");
-        
-       // this.router.navigateByUrl("/dashboard");
+      next: () => {        
+        this.router.navigateByUrl("/dashboard");
       },
       error: (err) => {
-       
-        console.log(err);
         this.hasError.set(true);
-        this.menssageError.set(err.message || "Ha ocurrido un error");
-      
+        this.menssageError.set(err || "An unknown error occurred");
       }
     });
    

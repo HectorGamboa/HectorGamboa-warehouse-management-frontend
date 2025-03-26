@@ -1,10 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '../../../services/theme.service';
 import { ClickOutsideDirective } from '../../../../shared/directives/click-outside.directive';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-profile-menu',
@@ -47,11 +48,6 @@ export class ProfileMenuComponent implements OnInit {
       icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
       link: '/settings',
     },
-    {
-      title: 'Log out',
-      icon: './assets/icons/heroicons/outline/logout.svg',
-      link: '/auth',
-    },
   ];
 
   public themeColors = [
@@ -85,6 +81,8 @@ export class ProfileMenuComponent implements OnInit {
     },
   ];
 
+   private authService = inject(AuthService);
+   private router = inject(Router);
   public themeMode = ['light', 'dark'];
   public themeDirection = ['ltr', 'rtl'];
 
@@ -114,4 +112,15 @@ export class ProfileMenuComponent implements OnInit {
       return { ...theme, direction: value };
     });
   }
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigateByUrl("/auth/login");
+      },
+      error: (err) => { 
+        console.log(err);
+      }
+    });
+  }
+
 }
